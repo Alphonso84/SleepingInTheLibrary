@@ -9,7 +9,7 @@
 // MARK: - Constants
 
 struct Constants {
-     //https:api.flickr.com/services/rest/?method=flickr.galleries.getPhotos&api_key=9c853da14ec63ea02507f1cf67545b5f&gallery_id=5704-72157622566655097&extras=url_m&format=json&nojsoncallback=1&auth_token=72157690495157056-ddef9f3be49e7682&api_sig=97a0c61cc01fc27ef4515af6e4a070ff
+     
     // MARK: Flickr
     struct Flickr {
         static let APIBaseURL = "https:api.flickr.com/services/rest/"
