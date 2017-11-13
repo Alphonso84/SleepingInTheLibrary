@@ -55,29 +55,38 @@ class ViewController: UIViewController {
         ]
         
         let urlString = Constants.Flickr.APIBaseURL + escapedParameters(methodParameters as [String:AnyObject])
+        
         let url = URL(string: urlString)!
+       
         let request = URLRequest(url: url)
         
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, err) in
+            
             
             // if an error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
                 print(error)
+                
                 print("URL at time of error: \(url)")
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
                 }
+            
             }
             
             // no error, woohoo!
-            if error == nil {
+            if err == nil {
+                print("No Error")
                 
                 // there was data returned
                 if let data = data {
+                    print("data returned")
                     
                     let parsedResult: [String:AnyObject]!
                     do {
                         parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+                        print(parsedResult)
+                        
                     } catch {
                         displayError("Could not parse the data as JSON: '\(data)'")
                         return
@@ -89,6 +98,7 @@ class ViewController: UIViewController {
                         
                         if let imageUrlString = photoDictionary[Constants.FlickrResponseKeys.MediumURL] as? String, let photoTitle = photoDictionary[Constants.FlickrResponseKeys.Title] as? String {
                             let imageURL = URL(string: imageUrlString)
+                            print(photoDictionary)
                             if let imageData = try? Data(contentsOf: imageURL!) {
                                 performUIUpdatesOnMain {
                                     self.photoImageView.image = UIImage(data: imageData)
