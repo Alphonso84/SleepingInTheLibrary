@@ -65,7 +65,7 @@ class ViewController: UIViewController {
             
             // if an error occurs, print it and re-enable the UI
             func displayError(_ error: String) {
-                print(error)
+               
                 
                 print("URL at time of error: \(url)")
                 performUIUpdatesOnMain {
@@ -76,16 +76,16 @@ class ViewController: UIViewController {
             
             // no error, woohoo!
             if err == nil {
-                print("No Error")
+              
                 
                 // there was data returned
                 if let data = data {
-                    print("data returned")
+                    
                     
                     let parsedResult: [String:AnyObject]!
                     do {
                         parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-                        print(parsedResult)
+                       
                         
                     } catch {
                         displayError("Could not parse the data as JSON: '\(data)'")
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
                         
                         if let imageUrlString = photoDictionary[Constants.FlickrResponseKeys.MediumURL] as? String, let photoTitle = photoDictionary[Constants.FlickrResponseKeys.Title] as? String {
                             let imageURL = URL(string: imageUrlString)
-                            print(photoDictionary)
+                           
                             if let imageData = try? Data(contentsOf: imageURL!) {
                                 performUIUpdatesOnMain {
                                     self.photoImageView.image = UIImage(data: imageData)
